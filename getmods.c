@@ -5,7 +5,7 @@
 #include <malloc.h>
 #include <ncurses.h>
 
-#include "dcc.h"
+#include "tesf.h"
 
 
 

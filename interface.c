@@ -2,11 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ncurses.h>
-#include "dcc.h"
+#include "tesf.h"
 
 int interface(char * mods[1024],char * data[1024])
     {
-    int i,x,y,u_input,hlight=0;
+    int i,x,y,u_input,hlight,page;
 
 
     initscr();
@@ -25,12 +25,14 @@ int interface(char * mods[1024],char * data[1024])
 
     refresh();
 
-    print_win(mods,win_left);
-    print_win(data,win_center);
+    print_win(mods,win_left,0);
+    print_win(data,win_center,0);
     print_instructions(win_right);
 
 
     win_active = win_left;
+    hlight = 0;
+    page = 0;
 
     while(1)
         {
@@ -40,12 +42,34 @@ int interface(char * mods[1024],char * data[1024])
 
         if(u_input==KEY_DOWN || u_input=='j')
             {
-            if(hlight != y-1) {hlight++;}
+            if(hlight < y-3) 
+                {
+                hlight++;
+                }
+            else
+                {
+                hlight=0;
+                page++;
+                print_win(mods,win_left,page);
+                print_win(data,win_center,page);
+                }
+
             drawpoint(win_active,hlight);
             }
         else if(u_input==KEY_UP || u_input=='k')
             {
-            if(hlight!=0) {hlight--;}
+            if(hlight > 0) 
+                {
+                hlight--;
+                }
+            else
+                {
+                hlight=y-3;
+                page--;
+                print_win(mods,win_left,page);
+                print_win(data,win_center,page);
+                }
+
             drawpoint(win_active,hlight);
             }
         else if(u_input==KEY_RIGHT || u_input==KEY_LEFT || u_input=='h' || u_input=='l')
@@ -63,6 +87,23 @@ int interface(char * mods[1024],char * data[1024])
             wrefresh(win_left);
             wrefresh(win_center);
             }       
+        else if(u_input=='\n')
+            {
+            if(win_active==win_left)
+                {
+                activate(mods,data,hlight+page*(y-2));
+                }
+            else if(win_active==win_center)
+                {
+                activate(data,mods,hlight+page*(y-2));
+                }
+            print_win(mods,win_left,page);
+            print_win(data,win_center,page);
+            }
+        else if(u_input == ' ')
+            {
+            //
+            }
         else if(u_input=='q')
             {
             break;
@@ -76,16 +117,27 @@ int interface(char * mods[1024],char * data[1024])
     }
 
 
-void print_win(char * array[1024],WINDOW * win)
+void print_win(char * array[1024],WINDOW * win,int page)
     {
-    int i;
+    int i,file;
     
     wclear(win);
     box(win,0,0);
 
-    for(i=0;i<getlen(array);i++)
+    i=1;
+    file=page*(getmaxy(win)-2);
+
+    for(i=1;i<getmaxy(win)-1;i++)
         {
-        mvwprintw(win,i+1,6,"%d. %s",i+1,array[i]);
+        if(array[file]==NULL) 
+            {
+            break;
+            }
+        else
+            {
+            mvwprintw(win,i,6,"%d. %s",file+1,array[file]);
+            file++; 
+            }
         }
 
     wrefresh(win);
@@ -97,13 +149,16 @@ void print_instructions(WINDOW * win)
     mvwprintw(win,2,2,"Use arrow keys or");
     mvwprintw(win,3,2,"vim keys to navigate");
 
-    mvwprintw(win,5,2,"activate and deactivate");
+    mvwprintw(win,5,2,"Activate and deactivate");
     mvwprintw(win,6,2,"mods with ENTER key");
 
-    mvwprintw(win,8,2,"s : apply changes");
-    mvwprintw(win,9,6,"and quit");
+    mvwprintw(win,8,2,"Change loadorder");
+    mvwprintw(win,9,2,"with SPACEBAR");
 
-    mvwprintw(win,11,2,"q : quit");
+    mvwprintw(win,11,2,"s : apply changes");
+    mvwprintw(win,12,6,"and quit");
+
+    mvwprintw(win,14,2,"q : quit");
     wrefresh(win);
     }
 
