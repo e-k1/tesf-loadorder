@@ -16,6 +16,8 @@ void drawpoint(WINDOW * win,int point);
 
 void print_instructions(WINDOW * win);
 
+int order_management(WINDOW * win,char * array[1024],int hlight,int page);
+
 int getlen(char * array[1024]);
 
 
