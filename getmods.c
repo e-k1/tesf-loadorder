@@ -12,8 +12,8 @@
 void getmods(char * array[1024])
     {
 
-    FILE* modfile;
-    modfile = fopen(skyrimlo,"r");
+    FILE * modfile;
+    modfile = fopen(plugin_file,"r");
     
     char * temp;
     size_t linesize;
@@ -22,6 +22,7 @@ void getmods(char * array[1024])
     while(getline(&temp,&linesize,modfile) != -1)
         {
         if(strstr(temp,"#"));
+        else if(strlen(temp)<3);
         else    //ignores comment lines
             {
             array[i] = malloc(1 + strlen(temp));   
@@ -37,7 +38,7 @@ void getmods(char * array[1024])
 
 void getdata(char * array[1024])
     {
-    DIR * datadir = opendir(skyrimdata);
+    DIR * datadir = opendir(game_path);
     struct dirent * modfile;
 
     int i=0;
@@ -71,8 +72,6 @@ void getuninst(char * inactive[1024],char * data[1024],char * mods[1024])
                 match = 1;
                 }
             }
-        if(strncmp(data[a],"Skyrim.esm",10)==0) {match = 1;}
-        else if(strncmp(data[a],"Update.esm",10)==0) {match = 1;}
 
         if(match==0)
             {

@@ -20,6 +20,13 @@ int order_management(WINDOW * win,char * array[1024],int hlight,int page);
 
 int getlen(char * array[1024]);
 
+int findpath(char * game);
+
+void addpath();
+
+void print_help();
+
+void save_changes(char * array[1024]);
 
 
 
@@ -27,3 +34,9 @@ int getlen(char * array[1024]);
 #define skyrimlo "/run/media/elmo/SSD500/ssdsteamL/steamapps/compatdata/72850/pfx/drive_c/users/steamuser/Local Settings/Application Data/Skyrim/plugins.txt"
 
 
+char game_path[512];
+char plugin_file[512];
+
+
+#define skyrim_p "/compatdata/72850/pfx/drive_c/users/steamuser/Local Settings/Application Data/Skyrim/plugins.txt"
+#define oblivion_p "/common/Oblivion/data/DLCList.txt"

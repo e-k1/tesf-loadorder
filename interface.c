@@ -115,14 +115,15 @@ int interface(char * mods[1024],char * data[1024])
             }
         else if(u_input=='q')
             {
-            break;
+            endwin();
+            return 0;
             }
-
+        else if(u_input=='s')
+            {
+            endwin();
+            return 1;
+            }
         }
-
-    endwin();
-    return 0;
-
     }
 
 
