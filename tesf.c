@@ -9,12 +9,12 @@
 
 int main(int argc,char * argv[])
     {
-    if(argc!=2)
+    if(argc != 2)
         {
         print_help();
         return 0;
         }
-    else if(strcmp(argv[1],"Skyrim")!=0 && strcmp(argv[1],"Skyrim_SE")!=0 && strcmp(argv[1],"Oblivion")!=0 && strcmp(argv[1],"Fallout_3")!=0 && strcmp(argv[1],"Fallout_NV")!=0)
+    else if(strcmp(argv[1],"Skyrim")!=0 && strcmp(argv[1],"SkyrimSE")!=0 && strcmp(argv[1],"Oblivion")!=0 && strcmp(argv[1],"Fallout3")!=0 && strcmp(argv[1],"FalloutNV")!=0 && strcmp(argv[1],"Fallout4")!=0)
         {
         print_help();
         return 0;
@@ -22,7 +22,7 @@ int main(int argc,char * argv[])
 
     if(findpath(argv[1])==0)
         {
-        addpath();
+        addpath(argv[1]);
         return 0;
         }
 
@@ -42,7 +42,7 @@ int main(int argc,char * argv[])
 
     if(svq==1)
         {
-        save_changes(modlist);
+        save_changes(modlist,argv[1]);
         }
 
     return 0;
@@ -52,11 +52,11 @@ int main(int argc,char * argv[])
 void print_help()
     {
     printf("Usage: tesf <game>\n\n");
-    printf("Supported games:\n\n\tSkyrim\n\tSkyrim_SE\n\tOblivion\n\tFallout_3\n\tFallout_NV\n\n");
+    printf("Supported games:\n\n\tSkyrim\n\tSkyrimSE\n\tOblivion\n\tFallout4\n\tFallout3\n\tFalloutNV\n\n");
     }
 
 
-void save_changes(char * array[1024])
+void save_changes(char * array[1024],char * game)
     {
     int i;
     char temp[128];
@@ -64,10 +64,21 @@ void save_changes(char * array[1024])
     FILE * modfile;
     modfile = fopen(plugin_file,"w");
 
-    for(i=0;i<getlen(array);i++)
+    if(strcmp(game,"SkyrimSE")==0 || strcmp(game,"Fallout4")==0)    
         {
-        strcpy(temp,array[i]);
-        fprintf(modfile,"%s\n",temp);
+        for(i=0;i<getlen(array);i++)
+            {
+            strcpy(temp,array[i]);
+            fprintf(modfile,"*%s\n",temp);
+            }       
+        }
+    else
+        {
+        for(i=0;i<getlen(array);i++)
+            {
+            strcpy(temp,array[i]);
+            fprintf(modfile,"%s\n",temp);
+            }
         }
 
     fclose(modfile);

@@ -14,19 +14,30 @@ void getmods(char * array[1024])
 
     FILE * modfile;
     modfile = fopen(plugin_file,"r");
+
     
     char * temp;
     size_t linesize;
 
-    int i=0;
+    int i=0,k;
+
     while(getline(&temp,&linesize,modfile) != -1)
         {
         if(strstr(temp,"#"));
         else if(strlen(temp)<3);
-        else    //ignores comment lines
+        else if(strstr(temp,"*"))
             {
             array[i] = malloc(1 + strlen(temp));   
-            strncpy(array[i],temp,strlen(temp)-1);  // this gets rid of the newline character
+            for(k=1;k<strlen(temp)-1;k++)
+                {
+                strncat(array[i],&temp[k],1);
+                }
+            i++; 
+            }
+        else 
+            {
+            array[i] = malloc(1 + strlen(temp));   
+            strncpy(array[i],temp,strlen(temp)-1); 
             i++; 
             }
         }
