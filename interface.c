@@ -18,10 +18,13 @@ int interface(char * mods[1024],char * data[1024])
 
     getmaxyx(stdscr,y,x);
 
-    WINDOW * win_left = newwin(y,2*x/5,0,0);
-    WINDOW * win_center = newwin(y,2*x/5,0,2*x/5);
-    WINDOW * win_right = newwin(y,x/5,0,4*x/5);
+    WINDOW * win_left = newwin(y-1,2*x/5,1,0);
+    WINDOW * win_center = newwin(y-1,2*x/5,1,2*x/5);
+    WINDOW * win_right = newwin(y-1,x/5,1,4*x/5);
     WINDOW * win_active;
+
+    mvprintw(0,getmaxx(win_left)/2-5,"Active plugins");
+    mvprintw(0,getmaxx(win_left)+getmaxx(win_left)/2-5,"Inactive plugins");
 
     refresh();
 
@@ -37,13 +40,13 @@ int interface(char * mods[1024],char * data[1024])
     while(1)
         {
         drawpoint(win_active,hlight);
-        selected=hlight+page*(y-2);
+        selected=hlight+page*(getmaxy(win_active)-2);
     
         u_input = getch();
 
         if(u_input==KEY_DOWN || u_input=='j')
             {
-            if(hlight < y-3) 
+            if(hlight < getmaxy(win_active)-3) 
                 {
                 hlight++;
                 }
@@ -65,7 +68,7 @@ int interface(char * mods[1024],char * data[1024])
                 }
             else if(page > 0)
                 {
-                hlight=y-3;
+                hlight=getmaxy(win_active)-3;
                 page--;
                 print_win(mods,win_left,page);
                 print_win(data,win_center,page);
