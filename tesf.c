@@ -33,7 +33,7 @@ int main(int argc,char * argv[])
     char * uninst[1024];
 
 
-    getmods(modlist);
+    if(getmods(modlist)==0) {return 0;};
     getdata(datafiles);
     getuninst(uninst,datafiles,modlist);
 

@@ -2,7 +2,7 @@ int interface(char * mods[1024],char * data[1024]);
 
 void getdata(char * array[1024]);
 
-void getmods(char * array[1024]);
+int getmods(char * array[1024]);
 
 void getuninst(char * inactive[1024],char * data[1024],char * mods[1024]);
 

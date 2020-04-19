@@ -9,12 +9,24 @@
 
 
 
-void getmods(char * array[1024])
+int getmods(char * array[1024])
     {
 
     FILE * modfile;
-    modfile = fopen(plugin_file,"r");
 
+    if(fopen(plugin_file,"r")==NULL)
+        {        
+        printf("Plugins file not found! File can be created if your game is installed and path is correctly set\nCreate plugins file now? (y/n) ");
+        if(getchar()=='y') 
+            {
+            modfile = fopen(plugin_file,"w");
+            fprintf(modfile,"\n");
+            fclose(modfile);
+            }
+        return 0;
+        }
+
+    modfile = fopen(plugin_file,"r");
     
     char * temp;
     size_t linesize;
@@ -43,7 +55,7 @@ void getmods(char * array[1024])
         }
 
     fclose(modfile);
-
+    return 1;
     }
 
 
