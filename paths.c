@@ -18,8 +18,6 @@ int findpath(char * game)
     char temp_path[512];
     size_t linesize;
 
-    pathfile = fopen("/home/elmo/.config/tesf-loadorder/paths.txt","r");
-
     if(strcmp(game,"Skyrim")==0)
         {
         pluginfile_path = skyrim_p;
@@ -49,8 +47,9 @@ int findpath(char * game)
         pluginfile_path = falloutnv_p;
         }
 
+    if(fopen(config_file,"r")==NULL) {return 0;}
 
-
+    pathfile = fopen(config_file,"r");
 
     while(getline(&temp,&linesize,pathfile) != -1)
         {
@@ -61,6 +60,7 @@ int findpath(char * game)
             break;
             }
         }
+    fclose(pathfile);
 
     if(found==0) {return 0;}
 
@@ -83,7 +83,6 @@ int findpath(char * game)
             }
         }
 
-    fclose(pathfile);
     return 1;
     }
 
@@ -100,7 +99,7 @@ void addpath(char * game)
         }
     else if(strcmp(game,"Oblivion")==0)
         {
-        todir = "/Oblivion/data/";
+        todir = "/Oblivion/Data/";
         }
     else if(strcmp(game,"Fallout4")==0)
         {
@@ -122,10 +121,11 @@ void addpath(char * game)
 
     printf("Insert path to game library (.../steamapps/common/)\n\n"); 
 
-    scanf("%s",&temp_path);
+    scanf("%s",temp_path);
 
     strcat(game_path,"/");
     strcat(game_path,strtok(temp_path,"/"));
+
 
     while(1)
         {

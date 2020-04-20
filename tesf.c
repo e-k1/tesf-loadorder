@@ -9,6 +9,8 @@
 
 int main(int argc,char * argv[])
     {
+    strcat(config_file,"/.config/tesf-loadorder/paths.txt");
+
     if(argc != 2)
         {
         print_help();
