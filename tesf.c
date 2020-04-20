@@ -56,30 +56,4 @@ void print_help()
     }
 
 
-void save_changes(char * array[1024],char * game)
-    {
-    int i;
-    char temp[128];
 
-    FILE * modfile;
-    modfile = fopen(plugin_file,"w");
-
-    if(strcmp(game,"SkyrimSE")==0 || strcmp(game,"Fallout4")==0)    
-        {
-        for(i=0;i<getlen(array);i++)
-            {
-            strcpy(temp,array[i]);
-            fprintf(modfile,"*%s\n",temp);
-            }       
-        }
-    else
-        {
-        for(i=0;i<getlen(array);i++)
-            {
-            strcpy(temp,array[i]);
-            fprintf(modfile,"%s\n",temp);
-            }
-        }
-
-    fclose(modfile);
-    }
