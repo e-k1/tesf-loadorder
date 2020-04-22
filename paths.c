@@ -92,62 +92,65 @@ void addpath(char * game)
     char temp_path[512];
     char * todir;
 
-
-    if(strcmp(game,"Skyrim")==0)
-        {
-        todir = "/Skyrim/Data/";
-        }
-    else if(strcmp(game,"Oblivion")==0)
-        {
-        todir = "/Oblivion/Data/";
-        }
-    else if(strcmp(game,"Fallout4")==0)
-        {
-        todir = "/Fallout 4/Data/";
-        }
-    else if(strcmp(game,"Fallout3")==0)
-        {
-        todir = "/Fallout 3 goty/Data/";
-        }
-    else if(strcmp(game,"FalloutNV")==0)
-        {
-        todir = "/Fallout New Vegas/Data/";
-        }
-    else if(strcmp(game,"SkyrimSE")==0)
-        {
-        todir = "/Skyrim Special Edition/Data/";
-        }
-
-
     printf("Insert path to game library (.../steamapps/common/)\n\n"); 
-
     scanf("%s",temp_path);
+
+    if(strstr(temp_path,"common")==NULL)
+        {
+        strcat(temp_path,"/incorect_path/common");  //this error will be dealt with later
+        }
 
     strcat(game_path,"/");
     strcat(game_path,strtok(temp_path,"/"));
 
-
-    while(1)
+    while(strstr(game_path,"common")==NULL)
         {
-        if(strstr(game_path,"common"))
-            {
-            strcat(game_path,todir);
-            break;
-            }
-        else
-            {
-            strcat(game_path,"/");
-            strcat(game_path,strtok(NULL,"/"));
-            }
+        strcat(game_path,"/");
+        strcat(game_path,strtok(NULL,"/"));
         }
 
 
-    FILE * pathfile;
-    pathfile = fopen(config_file,"a");
+    if(strcmp(game,"Skyrim")==0)
+        {
+        strcat(game_path,"/Skyrim/Data/");
+        }
+    else if(strcmp(game,"Oblivion")==0)
+        {
+        strcat(game_path,"/Oblivion/Data/");
+        }
+    else if(strcmp(game,"Fallout4")==0)
+        {
+        strcat(game_path,"/Fallout 4/Data/");
+        }
+    else if(strcmp(game,"Fallout3")==0)
+        {
+        strcat(game_path,"/Fallout 3 goty/Data/");
+        }
+    else if(strcmp(game,"FalloutNV")==0)
+        {
+        strcat(game_path,"/Fallout New Vegas/Data/");
+        }
+    else if(strcmp(game,"SkyrimSE")==0)
+        {
+        strcat(game_path,"/Skyrim Special Edition/Data/");
+        }
 
-    fprintf(pathfile,"%s\n",game_path);
 
-    fclose(pathfile);
+    if(opendir(game_path)==NULL)
+        {
+        printf("\nData folder not found!\nMake sure your game is installed and you entered the correct path\n\n");
+        }
+    else
+        {
+        FILE * pathfile;
+        pathfile = fopen(config_file,"a");
+
+        fprintf(pathfile,"%s\n",game_path);
+
+        fclose(pathfile);
+
+        printf("\nSuccess!\nRelaunch the program to manage plugins\n\n");
+        }
 
     }
 
