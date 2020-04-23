@@ -1,5 +1,5 @@
 # tesf-loadorder
-A simple program for managing your loadorder in TES and Fallout games
+A simple program for managing your loadorder in TES and Fallout games running through Proton
 
 ## Building
 
