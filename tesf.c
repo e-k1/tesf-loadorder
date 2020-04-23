@@ -9,7 +9,7 @@
 
 int main(int argc,char * argv[])
     {
-    strcat(config_file,"/tesf-loadorder/paths.txt");
+    strcat(config_file,"/.config/tesf-loadorder/paths.txt");
 
     if(argc != 2)
         {
@@ -56,6 +56,4 @@ void print_help()
     printf("Usage: tesf <game>\n\n");
     printf("Supported games:\n\n\tSkyrim\n\tSkyrimSE\n\tOblivion\n\tFallout4\n\tFallout3  (goty)\n\tFalloutNV\n\n");
     }
-
-
 

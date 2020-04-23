@@ -42,5 +42,5 @@ char plugin_file[512];
 #define falloutnv_p "/compatdata/22380/pfx/drive_c/users/steamuser/Local Settings/Application Data/FalloutNV/plugins.txt"
 
 
-#define config_file getenv("XDG_CONFIG_HOME")
+#define config_file getenv("HOME")
 
