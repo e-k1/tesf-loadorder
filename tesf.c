@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
-#include <malloc.h>
 #include <ncurses.h>
 #include "tesf.h"
 
