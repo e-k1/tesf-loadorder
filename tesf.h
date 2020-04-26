@@ -22,7 +22,7 @@ int getlen(char * array[1024]);
 
 int findpath(char * game);
 
-void addpath(char * game);
+void addpath();
 
 void print_help();
 

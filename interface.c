@@ -8,13 +8,11 @@ int interface(char * mods[1024],char * data[1024])
     {
     int i,x,y,u_input,hlight,page,selected;
 
-
     initscr();
     keypad(stdscr,TRUE);
     curs_set(0);
     cbreak();
     noecho();
-
 
     getmaxyx(stdscr,y,x);
 
@@ -31,7 +29,6 @@ int interface(char * mods[1024],char * data[1024])
     print_win(mods,win_left,0);
     print_win(data,win_center,0);
     print_instructions(win_right);
-
 
     win_active = win_left;
     hlight = 0;
@@ -235,10 +232,4 @@ int order_management(WINDOW * win,char * array[1024],int hlight,int page)
             }
         }
     }
-
-
-
-
-
-
 

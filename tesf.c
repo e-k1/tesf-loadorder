@@ -24,7 +24,7 @@ int main(int argc,char * argv[])
 
     if(findpath(argv[1])==0)
         {
-        addpath(argv[1]);
+        addpath();
         return 0;
         }
 
