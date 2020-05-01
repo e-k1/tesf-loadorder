@@ -106,6 +106,8 @@ void addpath()
 
         fclose(pathfile);
 
+        cap(temp_path);
+
         printf("\nSuccess!\nRelaunch the program to manage plugins\n\n");
         }
     }

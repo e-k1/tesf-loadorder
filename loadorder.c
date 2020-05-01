@@ -5,9 +5,6 @@
 #include <ncurses.h>
 #include "tesf.h"
 
-
-
-
 void activate(char * src_array[1024],char * dest_array[1024],int file)
     {
     int i;
@@ -19,7 +16,6 @@ void activate(char * src_array[1024],char * dest_array[1024],int file)
         src_array[i] = src_array[i+1];
 
         }
-
     }
 
 
@@ -46,7 +42,6 @@ void order(char * array[1024],int mod,int place)
             }
         array[place] = temp;
         }
-
     }
 
 

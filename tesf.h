@@ -28,10 +28,24 @@ void print_help();
 
 void save_changes(char * array[1024],char * game);
 
+void dir_check(char * dir);
+
+void inst_mod(char * src,char * dest);
+
+void cap(char * dir);
+
+void getinstallable(char * array[1024]);
+
+int installer_ui(char * array[1024]);
 
 
 char game_path[512];
 char plugin_file[512];
+
+char config_file[512];
+char mods_dir[512];
+
+#define home_dir getenv("HOME")
 
 
 #define skyrim_p "/compatdata/72850/pfx/drive_c/users/steamuser/Local Settings/Application Data/Skyrim/plugins.txt"
@@ -41,6 +55,4 @@ char plugin_file[512];
 #define fallout3_p "/compatdata/22370/pfx/drive_c/users/steamuser/Local Settings/Application Data/Fallout3/plugins.txt"
 #define falloutnv_p "/compatdata/22380/pfx/drive_c/users/steamuser/Local Settings/Application Data/FalloutNV/plugins.txt"
 
-
-#define config_file getenv("HOME")
 

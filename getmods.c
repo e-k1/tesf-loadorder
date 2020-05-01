@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <ncurses.h>
-
 #include "tesf.h"
-
-
 
 int getmods(char * array[1024])
     {
@@ -75,7 +72,31 @@ void getdata(char * array[1024])
         }
 
     closedir(datadir);
+    }
 
+
+void getinstallable(char * array[1024])
+    {
+    dir_check(mods_dir);
+
+    DIR * moddir = opendir(mods_dir);
+    struct dirent * modfile;
+    char temp_file[128];
+
+    int i=0;
+    while(modfile = readdir(moddir))
+        {
+        strcpy(temp_file,modfile->d_name);
+        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0);
+        else
+            {
+            array[i] = malloc(1 + strlen(modfile->d_name));
+            strcpy(array[i],temp_file);
+            i++;
+            }
+        }
+
+    closedir(moddir);
     }
 
 
@@ -102,7 +123,6 @@ void getuninst(char * inactive[1024],char * data[1024],char * mods[1024])
             }
         }
     }
-
 
 
 int getlen(char * array[1024])

@@ -113,6 +113,12 @@ int interface(char * mods[1024],char * data[1024])
                 print_win(data,win_center,page);
                 }
             }
+        else if(u_input=='2')
+            {
+            clear();
+            endwin();
+            return 2;
+            }
         else if(u_input=='q')
             {
             endwin();
@@ -122,6 +128,75 @@ int interface(char * mods[1024],char * data[1024])
             {
             endwin();
             return 1;
+            }
+        }
+    }
+
+
+int installer_ui(char * array[1024])
+    {
+    int i,x,y,u_input,hlight=0;
+    char temp_dir[512];
+
+    initscr();
+    keypad(stdscr,TRUE);
+    curs_set(0);
+    cbreak();
+    noecho();
+
+    getmaxyx(stdscr,y,x);
+
+    WINDOW * mods_win = newwin(y-1,4*x/5,1,0);
+    WINDOW * help_win = newwin(y-1,x/5,1,4*x/5);
+
+    mvprintw(0,getmaxx(mods_win)/2-5,"Installable mods");
+
+    refresh();
+
+    print_win(array,mods_win,0);
+    print_instructions(help_win);
+
+    while(1)
+        {
+        strcpy(temp_dir,mods_dir);
+        drawpoint(mods_win,hlight);
+
+        u_input = getch();
+
+        if(u_input==KEY_DOWN || u_input=='j')
+            {
+            if(hlight < getmaxy(mods_win)-3)
+                {
+                hlight++; 
+                }
+            }
+        else if(u_input==KEY_UP || u_input=='k')
+            {
+            if(hlight > 0)
+                {
+                hlight--;
+                }
+            }
+        else if(u_input=='\n')
+            {
+            if(array[hlight]!=NULL)
+                {
+                strcat(temp_dir,array[hlight]);
+                strcat(temp_dir,"/");
+                cap(temp_dir);
+                inst_mod(temp_dir,game_path);
+                for(i=hlight;i<getlen(array);i++)
+                    {
+                    array[i] = array[i+1];
+                    }
+                print_win(array,mods_win,0);
+                }
+            }
+        else if(u_input=='1')
+            {
+            clear();
+            endwin();
+            return 0;
             }
         }
     }
@@ -151,7 +226,6 @@ void print_win(char * array[1024],WINDOW * win,int page)
         }
 
     wrefresh(win);
-    
     }
 
 
@@ -170,6 +244,10 @@ void print_instructions(WINDOW * win)
     mvwprintw(win,12,6,"and quit");
 
     mvwprintw(win,14,2,"q : quit");
+
+    mvwprintw(win,16,2,"1 : loadorder mode");
+
+    mvwprintw(win,18,2,"2 : installer mode");
     wrefresh(win);
     }
 
