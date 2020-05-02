@@ -9,6 +9,8 @@
 
 void inst_mod(char * src,char * dest)
     {
+    int x,y;
+    getmaxyx(stdscr,y,x);
 
     DIR * mdr;
     struct dirent * fil;
@@ -29,7 +31,7 @@ void inst_mod(char * src,char * dest)
         strcat(temp_dir,temp_file);
         strcat(temp_dir,"/");
 
-        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0);
+        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0 || strstr(temp_file,".zip") || strstr(temp_file,".7z") || strstr(temp_file,".rar"));
         else 
             {
             if(opendir(temp_dir)!=NULL)
@@ -46,6 +48,7 @@ void inst_mod(char * src,char * dest)
                 {
                 strcat(temp_src,temp_file);
                 strcat(temp_dest,temp_file);
+                mvprintw(y-2,0,"%s",temp_dest);
                 rename(temp_src,temp_dest);
                 }
             }

@@ -146,7 +146,7 @@ int installer_ui(char * array[1024])
 
     getmaxyx(stdscr,y,x);
 
-    WINDOW * mods_win = newwin(y-1,4*x/5,1,0);
+    WINDOW * mods_win = newwin(y-4,4*x/5,1,0);
     WINDOW * help_win = newwin(y-1,x/5,1,4*x/5);
 
     mvprintw(0,getmaxx(mods_win)/2-5,"Installable mods");
