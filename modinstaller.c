@@ -57,6 +57,7 @@ void inst_mod(char * src,char * dest)
 
     }
 
+
 void dir_check(char * dir)
     {
     if(opendir(dir)==NULL)

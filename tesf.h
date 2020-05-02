@@ -39,6 +39,8 @@ void getinstallable(char * array[1024]);
 int installer_ui(char * array[1024]);
 
 
+
+
 char game_path[512];
 char plugin_file[512];
 

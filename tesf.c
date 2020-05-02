@@ -8,9 +8,7 @@
 int main(int argc,char * argv[])
     {
     strcpy(config_file,home_dir);
-    strcat(config_file,"/.local/share/tesf-loadorder/paths.txt");
-    strcpy(mods_dir,home_dir);
-    strcat(mods_dir,"/.local/share/tesf-loadorder/");
+    strcat(config_file,"/.config/tesf-loadorder/paths.txt");
 
     if(argc != 2)
         {
@@ -28,9 +26,6 @@ int main(int argc,char * argv[])
         addpath();
         return 0;
         }
-
-    strcat(mods_dir,argv[1]);
-    strcat(mods_dir,"/");
 
     int svq;
 

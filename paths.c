@@ -55,11 +55,18 @@ int findpath(char * game)
         if(strstr(temp,game))
             {
             strncpy(game_path,temp,strlen(temp)-1);
+            strcat(game_path,"Data/");
+
+            strncpy(mods_dir,temp,strlen(temp)-1);
+            strcat(mods_dir,"Mods/");
+
             found=1;
             break;
             }
         }
     fclose(pathfile);
+
+    dir_check(mods_dir);
 
     if(found==0) {return 0;}
 
@@ -90,12 +97,15 @@ void addpath()
     {
     char temp_path[512];
 
-    printf("Insert path to your game's data directory (.../steamapps/common/<game>/Data/)\n\n"); 
+    printf("Insert path to your game directory (.../steamapps/common/<game>/)\n\n"); 
     scanf("%[^\n]%*c",temp_path);
 
-    if(opendir(temp_path)==NULL)
+    strcpy(game_path,temp_path);
+    strcat(game_path,"Data/");
+
+    if(opendir(game_path)==NULL)
         {
-        printf("\nData files not found!\nMake sure your game is installed and you entered the correct path\n\n");
+        printf("\nGame not found!\nMake sure it is installed and you entered the correct path\n\n");
         }
     else
         {
