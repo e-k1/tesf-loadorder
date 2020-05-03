@@ -101,9 +101,16 @@ void addpath()
     scanf("%[^\n]%*c",temp_path);
 
     strcpy(game_path,temp_path);
-    strcat(game_path,"Data/");
+    strcat(temp_path,"Data/");
 
-    if(opendir(game_path)==NULL)
+    if(opendir(temp_path)==NULL)
+        {
+        strcpy(temp_path,game_path);
+        strcat(temp_path,"/Data/");
+        strcat(game_path,"/");
+        }
+
+    if(opendir(temp_path)==NULL)
         {
         printf("\nGame not found!\nMake sure it is installed and you entered the correct path\n\n");
         }
@@ -112,7 +119,7 @@ void addpath()
         FILE * pathfile;
         pathfile = fopen(config_file,"a");
 
-        fprintf(pathfile,"%s\n",temp_path);
+        fprintf(pathfile,"%s\n",game_path);
 
         fclose(pathfile);
 
