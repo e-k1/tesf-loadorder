@@ -7,24 +7,18 @@ Make sure you have the packages necessary to compile c code installed
 
 Install ncurses
 
-Make a directory called tesf-loadorder in $HOME/.config
-```
-mkdir $HOME/.config/tesf-loadorder
-```
-
 Clone or download the repository
 
-While inside the downloaded directory, compile the program with
+While inside the downloaded directory, compile and install the program with
 ```
-make
+make install
 ```
-
-Copy the output file 'tesf' to somewhere in your $PATH
 
 run the program with
 ```
 tesf
 ```
+
 
 ## Installing mods
 
