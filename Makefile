@@ -20,6 +20,13 @@ paths.o: paths.c tesf.h
 modinstaller.o: modinstaller.c tesf.h
 	gcc -c modinstaller.c
 
+install: tesf
+	mkdir -p ${HOME}/.config/tesf-loadorder
+	cp -f tesf /usr/bin
+
+uninstall:
+	rm -f /usr/bin/tesf
+
 clean:  
 	rm *.o tesf
 
