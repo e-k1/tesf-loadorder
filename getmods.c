@@ -79,6 +79,8 @@ void getinstallable(char * array[1024])
     {
     dir_check(mods_dir);
 
+    char temp_src[512];
+
     DIR * moddir = opendir(mods_dir);
     struct dirent * modfile;
     char temp_file[128];
@@ -87,7 +89,10 @@ void getinstallable(char * array[1024])
     while(modfile = readdir(moddir))
         {
         strcpy(temp_file,modfile->d_name);
-        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0);
+        strcpy(temp_src,mods_dir);
+        strcat(temp_src,temp_file);
+
+        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0 || opendir(temp_src)==NULL);
         else
             {
             array[i] = malloc(1 + strlen(modfile->d_name));

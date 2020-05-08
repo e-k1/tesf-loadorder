@@ -31,7 +31,12 @@ void inst_mod(char * src,char * dest)
         strcat(temp_dir,temp_file);
         strcat(temp_dir,"/");
 
-        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0 || strstr(temp_file,".zip") || strstr(temp_file,".7z") || strstr(temp_file,".rar"));
+        if(strcmp(temp_file,".")==0 || strcmp(temp_file,"..")==0);
+        else if(strstr(temp_file,".zip") || strstr(temp_file,".7z") || strstr(temp_file,".rar"))
+            {
+            strcat(temp_src,temp_file);
+            remove(temp_src);
+            }
         else 
             {
             if(opendir(temp_dir)!=NULL)
