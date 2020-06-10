@@ -22,11 +22,11 @@ modinstaller.o: modinstaller.c tesf.h
 
 install: tesf
 	mkdir -p ${HOME}/.config/tesf-loadorder
-	cp -f tesf /usr/bin
+	sudo cp -f tesf /usr/bin
 
 uninstall:
 	rm -f /usr/bin/tesf
 
 clean:  
-	rm *.o tesf
+	rm -f *.o tesf
 
