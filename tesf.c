@@ -5,6 +5,12 @@
 #include <ncurses.h>
 #include "tesf.h"
 
+char game_path[512];
+char plugin_file[512];
+
+char config_file[512];
+char mods_dir[512];
+
 int main(int argc,char * argv[])
     {
     strcpy(config_file,home_dir);
